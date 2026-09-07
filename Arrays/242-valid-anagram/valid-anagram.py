@@ -23,12 +23,7 @@ class Solution(object):
                 count_t[char] +=1
             else:
                 count_t[char] =1
-
-
-        if count_s == count_t:
-            return True
-        else:
-            return False
+        return count_s == count_t
 
 
 
