@@ -1,30 +1,40 @@
 class Solution(object):
     def groupAnagrams(self, strs):
+        
+        #Using tuples 
+
         groups = {}
+        #we are still using dictionary..
+        #we are just using tuples as our keys..
+
         for word in strs:
-            #what we are saying is we are going from 1 word to another..
-            # 1 string to another?
-#since these are anagrams we are talking about; we need to make sure that if they are anagrams of each other then ; we need to have something that can take them together?
+            #so there are 26 alphabets so we need an array capable of holding 26 alphabets.
+            count=[0]*26
+            #it creates [0 ,0 ,0 ,0, 0,0,0,0,0,,0,0,0,0,0,.....]
+            #26 of them...
 
-#I mean something that can represent these anagram by a single Key.
-            keys = "".join(sorted(word))
+            #now we need to make sure that ; when a letter is given --> we convert that letter into a alphabet..
+            #so heres how we do it
 
-#Yes .. key so: we can use dictionary for this...
-            #initiating dictionary outside of this.
-            if keys in groups:
-                #now it is simple we created a alpabhetic key for this anagram.
-                #now if it is already inside the group; we need to add that new word   
-                groups[keys].append(word)
+            #we use ord()..-> when we use ord('a') --> it gives the unicode of a.
+
+            for char in word:
+                index = ord(char) - ord('a')
+                count[index] +=1
+                #now we have got the indexing and proper markings of words here.
+                #we want to make sure; we properly make it a key..
+                #we use tuples here as the key that stores it 
+
+            key = tuple(count)
+
+            if key in groups:
+                groups[key].append(word)
             else:
-                #what if it is not inside..
-                #if it is not inside ; we need to make sure that it is added.
-
-                #remember this CLI...
-                groups[keys]=[word]
-                # dictionary[key] = value..
-                #if it doesnt have value already then it will add if it does; it will modify.
-
-                #the output is asking for the list
-                #we dont know all the keys that might be in the system 
-                #so to get the values of the system we just return groups.values...
+                groups[key]=[word]
+#note : our keys are tuple: but the values of the key in dictionary views are lists.
         return list(groups.values())
+
+
+
+
+
